@@ -2,32 +2,14 @@
 import ScreenSlider from './ScreenSlider.vue'
 import BasicScreen from './BasicScreen.vue'
 import MemoryCard from './MemoryCard.vue'
-import { onMounted } from 'vue'
-import { store } from '@/store'
-
-// interface Props {
-//   gameData: ExtendedCardData[]
-// }
-// const props = defineProps<Props>()
-// defineProps<Props>()
-
-// let extendedGameData = reactive<ExtendedCardData[]>(
-//   props.gameData.map((el) => ({ ...el, wasRevealed: false }))
-//   // props.gameData.map((el) => ({ ...el, wasRevealed: false }) as ExtendedCardData)
-// )
-onMounted(() => {
-  console.log(store)
-})
-// function revealCard(index: number) {
-//   store.gameTests[index].revealed = true
-// }
+import { store, cardSliderScreen } from '@/store'
 </script>
 
 <template>
-  <ScreenSlider>
+  <ScreenSlider @next-screen="cardSliderScreen++">
     <BasicScreen>
       <MemoryCard
-        v-for="(cardData, index) in store.gameTests"
+        v-for="(cardData, index) in store.randomizedData[cardSliderScreen]"
         :key="index"
         :card-data="cardData"
         :index="index"

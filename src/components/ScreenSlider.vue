@@ -2,16 +2,25 @@
 import { ref } from 'vue'
 
 let screenWrapperIndex = ref(0)
-
-// const changeScreen = (increment: 1 | -1) => {
-//   console.log('Changing screen...')
-//   screenWrapperIndex.value += increment
-// }
 </script>
 
 <template>
   <div class="screens-wrapper" :style="'--screen-index:' + screenWrapperIndex">
-    <slot :prevScreen="() => screenWrapperIndex--" :nextScreen="() => screenWrapperIndex++"></slot>
+    <slot
+      :prevScreen="
+        () => {
+          screenWrapperIndex--
+          $emit('prevScreen')
+        }
+      "
+      :nextScreen="
+        () => {
+          screenWrapperIndex++
+          $emit('nextScreen')
+        }
+      "
+      :screen-index="screenWrapperIndex"
+    ></slot>
   </div>
 </template>
 

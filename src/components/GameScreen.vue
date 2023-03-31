@@ -2,21 +2,29 @@
 import BasicScreen from './BasicScreen.vue'
 import CoolButton from './CoolButton.vue'
 import MemoryCardsSlider from './MemoryCardsSlider.vue'
-import { store } from '@/store'
+import { store, cardSliderScreen } from '@/store'
 
 interface Props {
   nextScreen: () => void
   prevScreen: () => void
 }
 
-// const props = defineProps<Props>()
+const props = defineProps<Props>()
 function areAllRevealed() {
-  return store.gameTests.every((el) => el.revealed === true)
+  return store.randomizedData[cardSliderScreen.value].every((el) => el.revealed === true)
 }
 function revealAll() {
-  return store.gameTests.forEach((el) => (el.revealed = true))
+  return store.randomizedData[cardSliderScreen.value].forEach((el) => (el.revealed = true))
 }
-defineProps<Props>()
+function nextButton() {
+  if (isLastScreen()) props.nextScreen()
+  else cardSliderScreen.value++
+}
+function isLastScreen() {
+  return cardSliderScreen.value + 1 === store.randomizedData.length
+}
+let content = () => (isLastScreen() ? 'Finalizar' : 'Siguiente')
+// defineProps<Props>()
 </script>
 
 <template>
@@ -24,7 +32,7 @@ defineProps<Props>()
     <MemoryCardsSlider />
     <div class="buttons-wrapper">
       <CoolButton @click="revealAll" :disabled="areAllRevealed()"> Voltear todas </CoolButton>
-      <CoolButton @click="nextScreen" :disabled="!areAllRevealed()">Siguiente</CoolButton>
+      <CoolButton @click="nextButton" :disabled="!areAllRevealed()">{{ content() }}</CoolButton>
     </div>
   </BasicScreen>
 </template>
