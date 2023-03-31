@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Raleway';
+  src: local('Raleway') url('/fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
+  /* src: url("/fonts/Raleway/Raleway-VariableFont_wght.ttf") format("truetype"); */
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito/Nunito-VariableFont_wght.ttf') format('truetype');
+  font-weight: 500 700;
+}

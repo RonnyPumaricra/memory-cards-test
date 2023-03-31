@@ -1,0 +1,9 @@
+html {
+  --background: #fff;
+  --primary: #577891;
+  --disabled-primary: #949a9e;
+  --spoiler-background: #949a9eaa;
+
+  --title-font: 'Raleway', serif;
+  --body-font: 'Nunito', sans-serif;
+}
