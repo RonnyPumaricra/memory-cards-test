@@ -4,7 +4,9 @@
 
 body {
   font-family: var(--body-font);
+  background: var(--background);
   font-weight: 500;
+  color: var(--txt-color);
 }
 
 #app {

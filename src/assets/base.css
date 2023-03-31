@@ -1,9 +1,24 @@
 html {
   --background: #fff;
+  --txt-color: #000;
   --primary: #577891;
+  /* --off-primary: hsl(206, 21%, 35%); */
+  --off-primary: var(--primary);
   --disabled-primary: #949a9e;
+  --disabled-txt: var(--background);
   --spoiler-background: #949a9eaa;
 
   --title-font: 'Raleway', serif;
   --body-font: 'Nunito', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --background: hsl(210deg 13% 19%);
+    --txt-color: hsl(210deg 5% 97%);
+    --primary: hsl(210deg 95% 40%);
+    --off-primary: hsl(210deg 85% 32%);
+    --disabled-primary: hsl(204deg 5% 33%);
+    --disabled-txt: hsl(204deg 5% 85%);
+  }
 }

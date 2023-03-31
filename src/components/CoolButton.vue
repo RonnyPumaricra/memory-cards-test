@@ -23,7 +23,7 @@ button {
   font-size: calc(20rem / 16);
   font-weight: 700;
   color: var(--primary);
-  background: var(--primary);
+  background: var(--off-primary);
 
   border: 0;
   padding: 0;
@@ -31,6 +31,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
+
 button:disabled {
   cursor: revert;
   background: var(--disabled-primary);
@@ -38,7 +39,7 @@ button:disabled {
 button:disabled span {
   background: var(--disabled-primary);
   border-color: var(--disabled-primary);
-  color: var(--background);
+  color: var(--disabled-txt);
   --y-translate: 0;
 }
 span {
@@ -52,6 +53,13 @@ span {
 
   transition: transform 150ms;
 }
+@media (prefers-color-scheme: dark) {
+  button:not(:disabled) span {
+    background: var(--primary);
+    color: var(--txt-color);
+  }
+}
+
 button:not(:disabled):hover span {
   --y-translate: -6px;
 }
