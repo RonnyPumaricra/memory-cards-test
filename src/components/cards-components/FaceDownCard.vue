@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BasicCard from './BasicCard.vue'
 import DecorativeSquares from './DecorativeSquares.vue'
 import RevealIcon from './RevealIcon.vue'
 
@@ -8,41 +9,22 @@ const tetrisBottomCorner = '100110'
 </script>
 
 <template>
-  <div class="face-down-card game-card">
-    <div class="decorative">
-      <div class="border"></div>
+  <BasicCard>
+    <template v-slot:decoration>
       <DecorativeSquares :tetris-shape="tetrisS" position="top left" />
       <DecorativeSquares :tetris-shape="tetrisS" position="bottom right" />
       <DecorativeSquares :tetris-shape="tetrisTopCorner" position="top right" />
       <DecorativeSquares :tetris-shape="tetrisBottomCorner" position="bottom left" />
-    </div>
-    <div class="content">
-      <button @click="$emit('revealCard')" class="reveal-card"><RevealIcon /></button>
-    </div>
-  </div>
+    </template>
+    <template v-slot:content>
+      <button @click="$emit('revealCard')" class="reveal-card">
+        <RevealIcon />
+      </button>
+    </template>
+  </BasicCard>
 </template>
 
 <style scoped>
-.decorative,
-.content {
-  position: absolute;
-  inset: 0;
-}
-
-.decorative {
-  background: #242b2f;
-  /* Min distance from any square to the card's edge */
-  --squares-inset: 28px;
-  --squares-gap: 6px;
-  --squares-size: 30px;
-  --squares-color: #005ebd;
-}
-.border {
-  position: absolute;
-  inset: 12px;
-  border: 6px solid #005ebd;
-}
-
 button {
   border: none;
   padding: 0;
@@ -73,10 +55,5 @@ button:hover {
 svg {
   width: 100%;
   fill: currentColor;
-}
-
-.game-card {
-  position: relative;
-  aspect-ratio: 3 / 4;
 }
 </style>
