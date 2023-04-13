@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+interface Props {
+  screenIndex: number
+}
+defineProps<Props>()
 
-let screenWrapperIndex = ref(0)
+// let screenWrapperIndex = ref(0)
 </script>
 
 <template>
-  <div class="screens-wrapper" :style="'--screen-index:' + screenWrapperIndex">
-    <slot
+  <div class="screens-wrapper" :style="'--screen-index:' + screenIndex">
+    <!-- <slot
       :prevScreen="
         () => {
           screenWrapperIndex--
@@ -20,7 +24,8 @@ let screenWrapperIndex = ref(0)
         }
       "
       :screen-index="screenWrapperIndex"
-    ></slot>
+    ></slot> -->
+    <slot></slot>
   </div>
 </template>
 

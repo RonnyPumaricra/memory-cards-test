@@ -2,18 +2,25 @@
 import ScreenSlider from './ScreenSlider.vue'
 import BasicScreen from './BasicScreen.vue'
 import MemoryCard from './MemoryCard.vue'
-import { store, cardSliderScreen } from '@/store'
+// import { store, cardSliderScreen } from '@/store'
+import type { ExtendedCardData } from '@/types'
+
+interface Props {
+  screenIndex: number
+  allCards: ExtendedCardData[][]
+}
+defineProps<Props>()
 </script>
 
 <template>
-  <ScreenSlider @next-screen="cardSliderScreen++">
-    <BasicScreen>
+  <ScreenSlider :screen-index="screenIndex">
+    <BasicScreen v-for="(cardDeck, deckIndex) in allCards" :key="deckIndex">
       <MemoryCard
-        v-for="(cardData, index) in store.randomizedData[cardSliderScreen]"
-        :key="index"
+        v-for="(cardData, cardIndex) in cardDeck"
+        :key="cardIndex"
         :card-data="cardData"
-        :index="index"
-        @reveal-card="cardData.revealed = true"
+        :index="cardIndex"
+        @reveal-card="$emit('revealCard', { deckIndex, cardIndex })"
       />
     </BasicScreen>
   </ScreenSlider>
