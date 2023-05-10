@@ -2,28 +2,31 @@
 import CoolButton from './components/CoolButton.vue'
 import BasicScreen from './components/BasicScreen.vue'
 import ScreenSlider from './components/ScreenSlider.vue'
-import GameScreen from './components/GameScreen.vue'
-import { store, randomizeGameData, cardSliderScreen } from './store'
+import { staticStore } from './store'
+
+import { reactive, ref } from 'vue'
+import MemoryTestGame from './components/MemoryTestGame.vue'
+
+let gameData = staticStore.allCardsData
+
+let testGameKey = ref(0)
+const mainSliderIndex = ref(0)
+
+function resetSlider() {
+  mainSliderIndex.value = 0
+  testGameKey.value++
+}
 </script>
 <template>
-  <ScreenSlider v-slot="{ nextScreen, prevScreen }">
+  <ScreenSlider :screen-index="mainSliderIndex">
     <BasicScreen>
-      <CoolButton @click="nextScreen"> Empezar! </CoolButton>
+      <CoolButton @click="mainSliderIndex++"> Empezar! </CoolButton>
     </BasicScreen>
-    <GameScreen :nextScreen="nextScreen" :prevScreen="prevScreen" />
     <BasicScreen>
-      <CoolButton
-        @click="
-          () => {
-            prevScreen()
-            prevScreen()
-            store.randomizedData = randomizeGameData(3)
-            cardSliderScreen = 0
-          }
-        "
-      >
-        Reiniciar!
-      </CoolButton>
+      <MemoryTestGame :raw-data="gameData" :key="testGameKey" @finish="mainSliderIndex++" />
+    </BasicScreen>
+    <BasicScreen>
+      <CoolButton @click="resetSlider"> Reiniciar! </CoolButton>
     </BasicScreen>
   </ScreenSlider>
 </template>
