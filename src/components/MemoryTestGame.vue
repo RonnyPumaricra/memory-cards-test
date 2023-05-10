@@ -3,17 +3,14 @@ import type { ExtendedCardData } from '@/types'
 import CoolButton from './CoolButton.vue'
 import MemoryCardsSlider from './MemoryCardsSlider.vue'
 
-import { staticStore } from '@/store'
 import { randomizeGameData } from '@/randomizing'
 import { reactive, ref } from 'vue'
 
-// interface Props {
-//   rawData: ExtendedCardData[]
-// }
-// defineProps<Props>()
-let randomizedCardData = reactive<ExtendedCardData[][]>(
-  randomizeGameData(staticStore.allCardsData, 3)
-)
+interface Props {
+  rawData: ExtendedCardData[]
+}
+const props = defineProps<Props>()
+let randomizedCardData = reactive(randomizeGameData(props.rawData, 3))
 let memoryScreenIndex = ref(0)
 
 function revealCard(eventArgs: { deckIndex: number; cardIndex: number }) {
@@ -34,10 +31,6 @@ function revealAll() {
 function isLastSreen() {
   return randomizedCardData.length === memoryScreenIndex.value + 1
 }
-
-function endMemoryTest() {
-  alert('No more screens!')
-}
 </script>
 
 <template>
@@ -52,14 +45,26 @@ function endMemoryTest() {
       <CoolButton v-if="!isLastSreen()" :disabled="!areAllRevealed()" @click="memoryScreenIndex++">
         Next
       </CoolButton>
-      <CoolButton v-else :disabled="!areAllRevealed()" @click="endMemoryTest">Finish</CoolButton>
+      <CoolButton v-else :disabled="!areAllRevealed()" @click="$emit('finish')">Finish</CoolButton>
     </div>
   </div>
 </template>
 
 <style scoped>
 .game-wrapper {
+  padding-top: 24px;
+  padding-bottom: 24px;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: inherit;
 }
 </style>

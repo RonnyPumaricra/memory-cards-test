@@ -1,46 +1,30 @@
-# memory-cards-test
+## ScreenSlider
 
-This template should help get you started developing with Vue 3 in Vite.
+Creates a slider for several screens.
 
-## Recommended IDE Setup
+- The index of the active screen is passed as a prop
+- Can only contain BasicScreen as children
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Should emit `@finish` if necessary.
 
-## Type Support for `.vue` Imports in TS
+## Basic Screen
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+If a screen is turned into its own component, it should emit a `@finish` event, so the parent element controls its logic.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Memory Game
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+The memory game is a screen, consists of:
 
-## Customize configuration
+- Cards Slider. Each screen with a set of cards.
+- Game controls. To interact with the slider.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Has `key` as a prop, so it can be re-rendered without modifying its initial data.
 
-## Project Setup
+### Rerolling
 
-```sh
-npm install
-```
+This component is rendered with a `key`, in order to be explicity updated by changing this. When it gets re-rendered, it suffles the card data again, so it's not necessary to update them.
 
-### Compile and Hot-Reload for Development
+# Discarded
 
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+GameScreen.vue
+ScreenSlider being able to control its own index. (Its parent controls it)

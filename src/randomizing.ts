@@ -3,6 +3,7 @@ interface randomItem {
   value: number
 }
 
+/** Suffles numbers from 0 to limit */
 const getRandomArray = (limit: number) => {
   const randomArray: randomItem[] = []
 
@@ -19,8 +20,8 @@ const getRandomArray = (limit: number) => {
 /**
  * Make a random list in the form:
  * [
- *  [ Cards for first slider ],
- *  [ Cards for second slider ],
+ *  [ d, a, b ],
+ *  [ f, k, e ],
  *  and so on...
  * ]
  */
@@ -31,8 +32,8 @@ export function randomizeGameData<T>(data: T[], cardsPerSlider: number) {
     if (i % cardsPerSlider === 0) {
       e++
     }
-    if (!newList[e]) newList[e] = []
-    newList[e][i % cardsPerSlider] = { ...data[randArray[i]] }
+    if (!newList[e]) newList[e] = [] // Make an array every `cardsPerSlider`
+    newList[e][i % cardsPerSlider] = { ...data[randArray[i]] } // copy of a random element
   }
   return newList
 }

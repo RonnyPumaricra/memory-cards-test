@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 interface Props {
   screenIndex: number
 }
 defineProps<Props>()
-
-// let screenWrapperIndex = ref(0)
 </script>
 
 <template>
