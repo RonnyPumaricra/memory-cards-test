@@ -1,3 +1,5 @@
+# Components
+
 ## ScreenSlider
 
 Creates a slider for several screens.
@@ -23,6 +25,14 @@ Has `key` as a prop, so it can be re-rendered without modifying its initial data
 ### Rerolling
 
 This component is rendered with a `key`, in order to be explicity updated by changing this. When it gets re-rendered, it suffles the card data again, so it's not necessary to update them.
+
+## Memory card
+
+Each memory card has two states: face-down and face-up.
+
+If the answer is an image, it should be `type: "img"` and `answer: /* url here */`, if not, `type: "txt"` and the text in `answer`.
+
+It is possible to use images instead of just text.
 
 # Discarded
 

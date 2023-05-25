@@ -17,10 +17,10 @@ defineProps<Props>()
 
 <template>
   <article>
-    <h3>{{ cardData.clue }}</h3>
+    <h3>{{ cardData.title ?? cardData.clue }}</h3>
     <!-- <div class="spoiler-card game-card" v-if="cardData.revealed">{{ cardData.answer }}</div> -->
-    <FaceUpCard v-if="cardData.revealed" :answer="cardData.answer" />
-    <FaceDownCard v-else @reveal-card="$emit('revealCard')" />
+    <FaceUpCard v-if="cardData.revealed" :answer="cardData.answer" :card-data="cardData" />
+    <FaceDownCard v-else @reveal-card="$emit('revealCard')" :card-data="cardData" />
     <!-- <button @click.once="$emit('revealCard', index)" :disabled="cardData.revealed">
       Turn card
     </button> -->

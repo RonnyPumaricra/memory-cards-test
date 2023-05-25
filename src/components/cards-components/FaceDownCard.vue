@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ExtendedCardData } from '@/types'
 import BasicCard from './BasicCard.vue'
 import DecorativeSquares from './DecorativeSquares.vue'
 import RevealIcon from './RevealIcon.vue'
@@ -6,6 +7,13 @@ import RevealIcon from './RevealIcon.vue'
 const tetrisS = '011110'
 const tetrisTopCorner = '011001'
 const tetrisBottomCorner = '100110'
+
+interface Props {
+  cardData: ExtendedCardData
+}
+defineProps<Props>()
+
+const baseUrl = import.meta.env.BASE_URL + 'cards-collections/'
 </script>
 
 <template>
@@ -15,9 +23,12 @@ const tetrisBottomCorner = '100110'
       <DecorativeSquares :tetris-shape="tetrisS" position="bottom right" />
       <DecorativeSquares :tetris-shape="tetrisTopCorner" position="top right" />
       <DecorativeSquares :tetris-shape="tetrisBottomCorner" position="bottom left" />
+      <div class="clue-img-wrapper" v-if="cardData.type == 'img'">
+        <img :src="baseUrl + cardData.clue" alt="" />
+      </div>
     </template>
     <template v-slot:content>
-      <button @click="$emit('revealCard')" class="reveal-card">
+      <button @click="$emit('revealCard')" :class="'reveal-card ' + cardData.type">
         <RevealIcon />
       </button>
     </template>
@@ -55,5 +66,19 @@ button:hover {
 svg {
   width: 100%;
   fill: currentColor;
+}
+
+button.img {
+  width: 70px;
+  height: 70px;
+  top: auto;
+  bottom: 40px;
+}
+
+.clue-img-wrapper {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
 }
 </style>
