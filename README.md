@@ -38,3 +38,11 @@ It is possible to use images instead of just text.
 
 GameScreen.vue
 ScreenSlider being able to control its own index. (Its parent controls it)
+
+# Notes
+
+When taking new images, make sure:
+
+- It's a Word document
+- The text has 18 font size, bold style.
+- Zoom = 170%
